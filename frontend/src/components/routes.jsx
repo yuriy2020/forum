@@ -1,9 +1,10 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { LinksPage } from './LinksPage'
-import { Account } from './Account'
-
-export const useRoute = isAuthenticated => {
+import Account from './Account'
+import HomePage from './HomePage'
+import Auth from './Auth'
+const useRoute = isAuthenticated => {
     if (isAuthenticated) {
         return (
             <Switch>
@@ -16,12 +17,16 @@ export const useRoute = isAuthenticated => {
                 <Redirect to='/' />
             </Switch>
         )
-    } 
+    }
     return (
         <Switch>
-            <Route path='/'>
-                <HomePage/>
+            <Route path='/' exact>
+                <Auth />
+                <HomePage />
             </Route>
-                    </Switch>
+            <Redirect to="/" />
+        </Switch>
     )
 }
+
+export default useRoute
