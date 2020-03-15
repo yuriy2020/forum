@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import Login from './components/login'
-import './components/login.css'
+import Auth from './components/Auth'
+import 'materialize-css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Login/>
+    <div className="container">
+      <header className="header">
+        <Auth/>
       </header>
     </div>
   );
