@@ -1,3 +1,6 @@
+// этот хук взаимодействует с сервером и отправляет разные сущности:
+// (loading -если проходит процесс загрузки и потенц ошибки
+
 import { useState, useCallback } from 'react'
 
 export const useHttp = () => {
@@ -8,13 +11,18 @@ export const useHttp = () => {
         setLoading(true)
 
         try {
+            if (body) {
+                body = JSON.stringify(body)
+                headers['Content-Type'] = 'application/json'
+            }
+
             const response = await fetch(url, {
                 method, body, headers
             })
             const data = await response.json()
 
             if (!response.ok) {
-                throw new Error(data.message || 'Что-то пошло не так')
+                throw new Error(data.message || 'Что-то пошло не такcc')
             }
 
             setLoading(false)
@@ -26,7 +34,7 @@ export const useHttp = () => {
             setError(e.message)
             throw e
         }
-    }, [])
+    }, []) // - набор зависимостей вторым параметром -пока пустой
 
     const clearError = () => setError(null)
 

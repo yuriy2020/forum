@@ -1,23 +1,29 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-//   /auth/register
+
 router.post('/register', async (req, res) => {
   try {
+   
     const { login, password } = req.body
     const candidate = await User.findOne({ login: login })
+
+    
     if (candidate) {
+     
       res.status(400).json({ message: '>>>Такой пользователь уже существует' })
     }
     //хеширование пароля
     const hashedPassword = await bcrypt.hash(password, 12);
-
+   
     //создание нового пользователя
     const user = new User({ login, password: hashedPassword })
+    
     await user.save()
+    
     res.status(201).json({ message: '>>>User created !' })
 
   } catch (e) {

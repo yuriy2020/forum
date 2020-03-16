@@ -3,8 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const session = require('express-session');
-const FileStore = require("session-file-store")(session);
+// const session = require('express-session');
+// const FileStore = require("session-file-store")(session);
 
 const cors = require('cors')
 
@@ -18,19 +18,19 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-// Session 
-app.use(
-  session({
-    store: new FileStore(),
-    key: "user_sid",
-    secret: "someword",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      expires: 600000000
-    }
-  })
-);
+// // Session 
+// app.use(
+//   session({
+//     store: new FileStore(),
+//     key: "user_sid",
+//     secret: "someword",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       expires: 600000000
+//     }
+//   })
+// );
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json({extended:true}));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

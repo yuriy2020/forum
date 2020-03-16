@@ -1,15 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHttp } from '../hooks/http.hook'
+import { useMessage } from '../hooks/message.hook'
 
 const Auth = () => {
-    const { loading, error, request } = useHttp()
+    const message = useMessage()
 
+    const { loading, request, error, clearError } = useHttp()
+
+    // хуки
     const [form, setForm] = useState({
         login: '', password: ''
     })
 
+    useEffect(() => {
+        message(error)
+        // clearError()
+    }, [error, message, clearError])
+
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
+    }
+
+    // потребуется 2 метода для регистрации и для логина
+    const registerHandler = async () => {
+        try {
+            const data = await request('/auth/register', 'POST', { ...form })
+            console.log('registerHandler', data)
+        } catch (error) {
+
+        } 
     }
 
     return (
@@ -41,15 +60,27 @@ const Auth = () => {
                         </div>
                     </div>
                     <div className="card-action">
-                        <button className="btn yellow darken-4 ">Войти</button>
-                        <button className="btn grey lighten-1 black-text">Регистрация</button>
+                        <button
+                            className="btn yellow darken-4 "
+                            //блокировка кнопки когда loading=true
+                            disabled={loading}
+                        >
+                            Войти
+                            </button>
+                        <button
+                            className="btn grey lighten-1 black-text"
+                            onClick={registerHandler}
+                            //блокировка кнопки когда loading=true
+                            disabled={loading}
+                        >
+                            Регистрация
+                            </button>
                     </div>
                 </div>
             </div>
         </div>
     )
 }
-
 
 
 export default Auth;
