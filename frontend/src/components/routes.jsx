@@ -4,12 +4,17 @@ import { LinksPage } from './LinksPage'
 import Account from './Account'
 import HomePage from './HomePage'
 import Auth from './Auth'
-const useRoute = isAuthenticated => {
+import { CreatePage } from './CreatePage'
+
+
+export const useRoutes = isAuthenticated => {
     if (isAuthenticated) {
         return (
             <Switch>
-                <Route path='/links' exact>
-                    <LinksPage />
+                <Route path='/' exact>
+                    <Account />
+                    <CreatePage />
+                    <HomePage />
                 </Route>
                 <Route path='/account' exact>
                     <Account />
@@ -28,5 +33,3 @@ const useRoute = isAuthenticated => {
         </Switch>
     )
 }
-
-export default useRoute

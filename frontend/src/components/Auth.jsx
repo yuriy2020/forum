@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
+import { AuthContext } from '../context/AuthContext'
 
 const Auth = () => {
+    const auth = useContext(AuthContext)
+
     const message = useMessage()
 
     const { loading, request, error, clearError } = useHttp()
@@ -29,16 +32,17 @@ const Auth = () => {
             console.log('registerHandler', data)
         } catch (error) {
 
-        } 
+        }
     }
     const loginHandler = async () => {
         try {
             const data = await request('/auth/login', 'POST', { ...form })
-            message(data.message)
+            // message(data.message)
+            auth.login(data.token, data.userId)
             console.log('loginHandler', data)
         } catch (error) {
 
-        } 
+        }
     }
 
     return (
