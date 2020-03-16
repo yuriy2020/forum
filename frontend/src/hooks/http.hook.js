@@ -36,7 +36,8 @@ export const useHttp = () => {
         }
     }, []) // - набор зависимостей вторым параметром -пока пустой
 
-    const clearError = () => setError(null)
+    // const clearError = () => setError(null)
+    const clearError = useCallback(() => setError(null), [])
 
     return { loading, request, error, clearError }
 }

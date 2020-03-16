@@ -14,7 +14,7 @@ const Auth = () => {
 
     useEffect(() => {
         message(error)
-        // clearError()
+        clearError()
     }, [error, message, clearError])
 
     const changeHandler = event => {
@@ -25,7 +25,17 @@ const Auth = () => {
     const registerHandler = async () => {
         try {
             const data = await request('/auth/register', 'POST', { ...form })
+            message(data.message)
             console.log('registerHandler', data)
+        } catch (error) {
+
+        } 
+    }
+    const loginHandler = async () => {
+        try {
+            const data = await request('/auth/login', 'POST', { ...form })
+            message(data.message)
+            console.log('loginHandler', data)
         } catch (error) {
 
         } 
@@ -62,6 +72,7 @@ const Auth = () => {
                     <div className="card-action">
                         <button
                             className="btn yellow darken-4 "
+                            onClick={loginHandler}
                             //блокировка кнопки когда loading=true
                             disabled={loading}
                         >

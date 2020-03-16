@@ -14,9 +14,10 @@ router.post('/register', async (req, res) => {
     
     if (candidate) {
      
-      res.status(400).json({ message: '>>>Такой пользователь уже существует' })
+      res.status(201).json({ message: 'Такой пользователь уже существует' })
     }
-    //хеширование пароля
+    else {
+      //хеширование пароля
     const hashedPassword = await bcrypt.hash(password, 12);
    
     //создание нового пользователя
@@ -24,7 +25,9 @@ router.post('/register', async (req, res) => {
     
     await user.save()
     
-    res.status(201).json({ message: '>>>User created !' })
+    res.status(201).json({ message: 'Новый аккаунт создан !' })
+    }
+    
 
   } catch (e) {
     res.status(500).json({ message: '>>>Что-то пошло не так...' })

@@ -10,7 +10,9 @@ const cors = require('cors')
 
 // Подключаем mongoose.
 const mongoose = require("mongoose");
-mongoose.connect('mongodb+srv://yuri:12341234@cluster0-hd6ks.azure.mongodb.net/forum?retryWrites=true&w=majority', 
+//AtlasMongDB
+// mongoose.connect('mongodb+srv://yuri:12341234@cluster0-hd6ks.azure.mongodb.net/forum?retryWrites=true&w=majority', 
+mongoose.connect('mongodb://localhost:27017/forum',
 { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex:true});
 
 var indexRouter = require('./routes/index');
