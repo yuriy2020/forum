@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom'
-import { useRoutes } from './components/routes'
+import { useRoutes } from './pages/routes'
 import { useAuth } from './hooks/auth.hook'
 import { AuthContext } from './context/AuthContext'
+import { Navbar } from './components/navbar';
 import 'materialize-css'
 
 
@@ -17,6 +18,7 @@ function App() {
       token, login, logout, userId, isAuthenticated
     }}>
       <Router> 
+        {isAuthenticated && <Navbar />}
         <div className="container">
           <header className="header">  
             {routes}

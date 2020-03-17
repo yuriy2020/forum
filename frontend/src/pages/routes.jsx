@@ -8,16 +8,18 @@ import { CreatePage } from './CreatePage'
 
 
 export const useRoutes = isAuthenticated => {
+    console.log("IsAuth >>>",isAuthenticated)
     if (isAuthenticated) {
         return (
             <Switch>
                 <Route path='/' exact>
-                    <Account />
-                    <CreatePage />
                     <HomePage />
                 </Route>
                 <Route path='/account' exact>
                     <Account />
+                </Route>
+                <Route path='/create' exact>
+                    <CreatePage />
                 </Route>
                 <Redirect to='/' />
             </Switch>
