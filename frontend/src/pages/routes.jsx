@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { LinksPage } from './LinksPage'
+// import { LinksPage } from './LinksPage'
 import Account from './Account'
 import HomePage from './HomePage'
 import Auth from './Auth'
