@@ -15,7 +15,7 @@ export const Navbar = () => {
     return (
         <nav>
             <div className="nav-wrapper blue lighten-3">
-                <a href="/" className="brand-logo">Logo</a>
+                <a href="/" className="brand-logo">Forum</a>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><NavLink to="/account">Аккаунт</NavLink></li>
                     <li><NavLink to="/create">Создать</NavLink></li>
