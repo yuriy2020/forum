@@ -29,7 +29,7 @@ router.post('/register', async (req, res) => {
     }
     
   } catch (e) {
-    res.status(500).json({ message: '>>>Что-то пошло не так...' })
+    res.status(500).json({ message: 'Что-то пошло не так...' })
   }
 });
 
@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
     const { login, password } = req.body
     const user = await User.findOne({ login })
     if (!user) {
-      return res.status(400).json({ message: ">>>User didn't found" })
+      return res.status(400).json({ message: "Пользователь не найден" })
     }
 
     // сравнение хешированых паролей
@@ -53,14 +53,14 @@ router.post('/login', async (req, res) => {
     //token
     const token = jwt.sign(
       { userId: user.id },
-      "some secret frase",
+      "any secret frase",
       { expiresIn: '1h' }
     )
     res.json({ token, userId: user.id })
 
     
   } catch (e) {
-    res.status(500).json({ message: '>>>Что-то пошло не так...' })
+    res.status(500).json({ message: 'Что-то пошло не так...' })
   }
 });
 
