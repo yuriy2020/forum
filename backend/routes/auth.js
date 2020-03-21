@@ -18,7 +18,7 @@ router.post('/register', async (req, res) => {
     }
     else {
       //хеширование пароля
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(password, 10);
    
     //создание нового пользователя
     const user = new User({ login, password: hashedPassword })
